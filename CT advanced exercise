@@ -1,0 +1,50 @@
+from random import shuffle
+
+p1 = input("Player 1 name: ")
+p2 = input("Player 2 name: ")
+goal = input("Total Score: ")
+goal = int(goal)
+
+dice1 = [1,2,3,4,5,6]
+dice2 = [1,2,3,4,5,6]
+totalp1 = 0
+totalp2 = 0
+
+def shuf():
+  shuffle(dice1)
+  shuffle(dice2)
+
+def p1turn():
+  shuf()
+  while dice1[0] + dice2[0] != 7:
+    global totalp1 
+    totalp1 = totalp1 + dice1[0] + dice2[0]
+    shuf()
+    if dice1[0] + dice2[0] == 7:
+      print(p1,"has finished a turn")
+      print(totalp1)
+      break
+
+def p2turn():
+  shuf()
+  while dice1[0] + dice2[0] != 7:
+    global totalp2
+    totalp2 = totalp2 + dice1[0] + dice2[0]
+    shuf()
+    if dice1[0] + dice2[0] == 7:
+      print(p2,"has finished a turn")
+      print(totalp2)
+      break
+  
+
+while totalp1 < int(goal) and totalp2 < int(goal):
+  p1turn()
+  p2turn()
+
+if totalp1 > int(goal) or totalp2 > int(goal):
+    if totalp1 >= int(goal):
+      print(p1,"wins!")
+      print(totalp1)
+    elif totalp2 >= int(goal):
+      print(p2,"wins!")
+      print(totalp2)
