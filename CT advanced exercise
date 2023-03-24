@@ -10,31 +10,49 @@ dice2 = [1,2,3,4,5,6]
 totalp1 = 0
 totalp2 = 0
 
-def shuf():
+def roll():
   shuffle(dice1)
   shuffle(dice2)
 
 def p1turn():
-  shuf()
+  roll()
+  rollcount = 0
   while dice1[0] + dice2[0] != 7:
     global totalp1 
-    totalp1 = totalp1 + dice1[0] + dice2[0]
-    shuf()
+    if dice1[0] == dice2[0]:
+      doublescore = (dice1[0] + dice2[0]) * 2
+      totalp1 = totalp1 + doublescore
+    else:
+      totalp1 = totalp1 + dice1[0] + dice2[0]
+    roll()
+    rollcount = rollcount + 1
     if dice1[0] + dice2[0] == 7:
-      print(p1,"has finished a turn")
-      print(totalp1)
       break
+  print('**')
+  print(p1,"has finished a turn.")
+  print(p1,"has rolled the dice",rollcount,"times.")
+  print(p1,'has a total score of',totalp1)
+  print('**')
+      
 
 def p2turn():
-  shuf()
+  roll()
+  rollcount1 = 0
   while dice1[0] + dice2[0] != 7:
     global totalp2
-    totalp2 = totalp2 + dice1[0] + dice2[0]
-    shuf()
+    if dice1[0] == dice2[0]:
+      doublescore = (dice1[0] + dice2[0]) * 2
+      totalp2 = totalp2 + doublescore
+    else:
+      totalp2 = totalp2 + dice1[0] + dice2[0]
+    roll()
+    rollcount1 = rollcount1 + 1
     if dice1[0] + dice2[0] == 7:
-      print(p2,"has finished a turn")
-      print(totalp2)
       break
+  print(p2,"has finished a turn")
+  print(p2,"has rolled the dice",rollcount1,"times.")
+  print(p2,'has a total score of',totalp2)
+      
   
 
 while totalp1 < int(goal) and totalp2 < int(goal):
@@ -43,8 +61,10 @@ while totalp1 < int(goal) and totalp2 < int(goal):
 
 if totalp1 > int(goal) or totalp2 > int(goal):
     if totalp1 >= int(goal):
-      print(p1,"wins!")
-      print(totalp1)
+      print(" ")
+      print(" ")
+      print(p1,"wins!",p1,"had a total score of: ",totalp1)
     elif totalp2 >= int(goal):
-      print(p2,"wins!")
-      print(totalp2)
+      print(" ")
+      print(" ")
+      print(p2,"wins!",p2,"had a total score of: ",totalp2)
